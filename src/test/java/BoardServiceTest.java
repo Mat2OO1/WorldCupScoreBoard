@@ -1,6 +1,7 @@
 
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import org.example.BoardService;
@@ -25,6 +26,15 @@ public class BoardServiceTest {
     boardService.finishGame("Home", "Away");
 
     assertTrue(boardService.getGames().isEmpty());
+  }
+
+  @Test
+  public void shouldThrowExceptionWhenGameToFinishNotFound() {
+    BoardService boardService = new BoardService();
+
+    boardService.startGame("Home", "Away");
+
+    assertThrows(GameNotFoundException.class, () -> boardService.finishGame("abc", "abc"));
   }
 
 }
