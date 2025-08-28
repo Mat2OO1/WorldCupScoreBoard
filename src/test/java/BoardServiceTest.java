@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import org.example.BoardService;
+import org.example.exception.GameNotFoundException;
 import org.junit.Test;
 
 public class BoardServiceTest {
