@@ -2,6 +2,7 @@
 
 import static org.junit.Assert.assertFalse;
 
+import org.example.BoardService;
 import org.junit.Test;
 
 public class BoardServiceTest {
