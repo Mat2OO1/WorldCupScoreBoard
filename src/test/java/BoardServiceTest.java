@@ -20,6 +20,16 @@ public class BoardServiceTest {
   }
 
   @Test
+  public void shouldThrowExceptionWhenGameAlreadyStarted() {
+    BoardService boardService = new BoardService();
+    boardService.startGame("Home", "Away");
+
+
+    assertThrows(GameAlreadyStartedException.class, () -> boardService.startGame("Home", "Away"));
+
+  }
+
+  @Test
   public void shouldFinishGame() {
     BoardService boardService = new BoardService();
 
