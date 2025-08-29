@@ -13,22 +13,27 @@ public class BoardService implements IBoardService {
 
   public void startGame(String homeTeam, String awayTeam) {
     if (this.getGame(homeTeam, awayTeam).isPresent()) {
-      throw new GameAlreadyStartedException("Game already started");
+      throw new GameAlreadyStartedException(BoardConstants.GAME_ALREADY_STARTED);
     } else {
       this.currentGames.add(
-          Game.builder().homeTeam(homeTeam).awayTeam(awayTeam).homeGoals(0).awayGoals(0).build());
+          Game.builder()
+              .homeTeam(homeTeam)
+              .awayTeam(awayTeam)
+              .homeGoals(BoardConstants.GAME_STARTING_VALUE)
+              .awayGoals(BoardConstants.GAME_STARTING_VALUE)
+              .build());
     }
   }
 
   public void finishGame(String homeTeam, String awayTeam) {
     Game foundGame = this.getGame(homeTeam, awayTeam).orElseThrow(
-        () -> new GameNotFoundException("Game with given home team and away team not found"));
+        () -> new GameNotFoundException(BoardConstants.GAME_NOT_FOUND));
     currentGames.remove(foundGame);
   }
 
   public Game updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
     Game foundGame = this.getGame(homeTeam, awayTeam).orElseThrow(
-        () -> new GameNotFoundException("Game with given home team and away team not found"));
+        () -> new GameNotFoundException(BoardConstants.GAME_NOT_FOUND));
     foundGame.setHomeGoals(homeScore);
     foundGame.setAwayGoals(awayScore);
     return foundGame;
