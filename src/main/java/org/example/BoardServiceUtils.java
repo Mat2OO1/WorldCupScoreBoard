@@ -5,7 +5,8 @@ import org.example.exception.GameInputValidationException;
 public class BoardServiceUtils {
 
   public static void validateInput(String homeTeam, String awayTeam) {
-    if (homeTeam == null || awayTeam == null || homeTeam.isEmpty() || awayTeam.isEmpty()) {
+    if (homeTeam == null || awayTeam == null || homeTeam.isEmpty() || awayTeam.isEmpty()
+        || homeTeam.isBlank() || awayTeam.isBlank()) {
       throw new GameInputValidationException(BoardConstants.TEAM_NAME_NULL_OR_EMPTY);
     }
   }
