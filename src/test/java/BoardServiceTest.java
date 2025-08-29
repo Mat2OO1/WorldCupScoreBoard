@@ -68,4 +68,25 @@ public class BoardServiceTest {
     assertThrows(GameNotFoundException.class, () -> boardService.updateScore("Home", "Away", 1, 3));
   }
 
+  @Test
+  public void shouldReturnSummaryOfGames() {
+    BoardService boardService = new BoardService();
+    boardService.startGame("Spain", "Brazil");
+    boardService.startGame("Germany", "France");
+    boardService.startGame("Argentina", "Australia");
+
+    boardService.updateScore("Spain", "Brazil", 10, 2);
+    boardService.updateScore("Germany", "France", 2, 2);
+    boardService.updateScore("Argentina", "Australia", 3, 1);
+
+    var summary = boardService.getSummary();
+
+    assertEquals("Spain", summary.get(0).getHomeTeam());
+    assertEquals("Brazil", summary.get(0).getAwayTeam());
+    assertEquals("Germany", summary.get(1).getHomeTeam());
+    assertEquals("France", summary.get(1).getAwayTeam());
+    assertEquals("Argentina", summary.get(2).getHomeTeam());
+    assertEquals("Australia", summary.get(2).getAwayTeam());
+  }
+
 }
