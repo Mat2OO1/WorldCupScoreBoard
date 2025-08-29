@@ -33,6 +33,17 @@ public class BoardService implements IBoardService {
     currentGames.remove(foundGame);
   }
 
+  public Game updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
+    Game foundGame = currentGames.stream()
+        .filter(game -> game.getHomeTeam().equals(homeTeam) && game.getAwayTeam().equals(awayTeam))
+        .findFirst()
+        .orElseThrow(
+            () -> new GameNotFoundException("Game with given home team and away team not found"));
+    foundGame.setHomeGoals(homeScore);
+    foundGame.setAwayGoals(awayScore);
+    return foundGame;
+  }
+
   public List<Game> getGames() {
     return currentGames;
   }
