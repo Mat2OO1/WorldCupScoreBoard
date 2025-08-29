@@ -9,4 +9,6 @@ public interface IBoardService {
   List<Game> getGames();
 
   Game updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore);
+
+  List<Game> getSummary();
 }

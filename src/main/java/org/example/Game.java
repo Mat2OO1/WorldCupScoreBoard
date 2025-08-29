@@ -1,9 +1,11 @@
 package org.example;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Builder
 public class Game {
 
@@ -11,4 +13,9 @@ public class Game {
   private String awayTeam;
   private int homeGoals;
   private int awayGoals;
+
+  public int getTotalGoals() {
+    return homeGoals + awayGoals;
+  }
+
 }

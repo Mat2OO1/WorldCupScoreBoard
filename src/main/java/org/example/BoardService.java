@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import org.example.exception.GameAlreadyStartedException;
@@ -33,6 +34,13 @@ public class BoardService implements IBoardService {
     return foundGame;
   }
 
+  public List<Game> getSummary() {
+    var gameList = new ArrayList<>(currentGames);
+    gameList.sort(Comparator.comparingInt(Game::getTotalGoals).reversed());
+
+    return gameList;
+  }
+
   public List<Game> getGames() {
     return currentGames;
   }
@@ -42,5 +50,4 @@ public class BoardService implements IBoardService {
         .filter(game -> game.getHomeTeam().equals(homeTeam) && game.getAwayTeam().equals(awayTeam))
         .findFirst();
   }
-
 }
