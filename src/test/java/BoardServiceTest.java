@@ -61,4 +61,11 @@ public class BoardServiceTest {
     assertEquals(3, updatedGame.getAwayGoals());
   }
 
+  @Test
+  public void shouldThrowExceptionWhenGameToUpdateScoreNotFound() {
+    BoardService boardService = new BoardService();
+
+    assertThrows(GameNotFoundException.class, () -> boardService.updateScore("Home", "Away", 1, 3));
+  }
+
 }
