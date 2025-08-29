@@ -9,6 +9,8 @@ import org.example.BoardService;
 import org.example.exception.GameAlreadyStartedException;
 import org.example.exception.GameNotFoundException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class BoardServiceTest {
 
@@ -19,6 +21,15 @@ public class BoardServiceTest {
     boardService.startGame("Home", "Away");
 
     assertFalse(boardService.getGames().isEmpty());
+  }
+
+  @ParameterizedTest
+  @CsvSource(value ={"null, away", "home, null", ",away", "home,"}, nullValues = "null")
+  public void shouldNotStartGameWhenInputIsInvalid(String homeTeam, String awayTeam) {
+    BoardService boardService = new BoardService();
+
+    assertThrows(
+        GameInputValidationException.class, () -> boardService.startGame(homeTeam,  awayTeam));
   }
 
   @Test
