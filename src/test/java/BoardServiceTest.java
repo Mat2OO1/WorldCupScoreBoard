@@ -83,10 +83,10 @@ public class BoardServiceTest {
 
     assertEquals("Spain", summary.get(0).getHomeTeam());
     assertEquals("Brazil", summary.get(0).getAwayTeam());
-    assertEquals("Germany", summary.get(1).getHomeTeam());
-    assertEquals("France", summary.get(1).getAwayTeam());
-    assertEquals("Argentina", summary.get(2).getHomeTeam());
-    assertEquals("Australia", summary.get(2).getAwayTeam());
+    assertEquals("Argentina", summary.get(1).getHomeTeam());
+    assertEquals("Australia", summary.get(1).getAwayTeam());
+    assertEquals("Germany", summary.get(2).getHomeTeam());
+    assertEquals("France", summary.get(2).getAwayTeam());
   }
 
 }
