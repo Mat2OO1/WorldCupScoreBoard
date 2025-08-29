@@ -25,7 +25,7 @@ public class BoardServiceTest {
   }
 
   @ParameterizedTest
-  @CsvSource(value = {"null, away", "home, null", ",away", "home,"}, nullValues = "null")
+  @CsvSource(value = {"null, away", "home, null", ",away", "home,", "home,' '"}, nullValues = "null")
   public void shouldNotStartGameWhenInputIsInvalid(String homeTeam, String awayTeam) {
     BoardService boardService = new BoardService();
 
@@ -53,7 +53,7 @@ public class BoardServiceTest {
   }
 
   @ParameterizedTest
-  @CsvSource(value = {"null, away", "home, null", ",away", "home,"}, nullValues = "null")
+  @CsvSource(value = {"null, away", "home, null", ",away", "home,", "' ',away"}, nullValues = "null")
   public void shouldNotFinishGameWhenInputIsInvalid(String homeTeam, String awayTeam) {
     BoardService boardService = new BoardService();
 
