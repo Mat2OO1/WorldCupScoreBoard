@@ -34,8 +34,8 @@ public class BoardServiceTest {
   }
 
   @ParameterizedTest
-  @CsvSource(value = {"null, away", "home, null", ",away", "home,",
-      "home,' '"}, nullValues = "null")
+  @CsvSource(value = {"null, away", "home, null", "'',away", "home,''",
+      "home,' '", "' ',away"}, nullValues = "null")
   public void shouldNotStartGameWhenInputIsInvalid(String homeTeam, String awayTeam) {
     assertThrows(GameInputValidationException.class,
         () -> boardService.startGame(homeTeam, awayTeam));
@@ -57,8 +57,8 @@ public class BoardServiceTest {
   }
 
   @ParameterizedTest
-  @CsvSource(value = {"null, away", "home, null", ",away", "home,",
-      "' ',away"}, nullValues = "null")
+  @CsvSource(value = {"null, away", "home, null", "'',away", "home,''",
+      "home,' '", "' ',away"}, nullValues = "null")
   public void shouldNotFinishGameWhenInputIsInvalid(String homeTeam, String awayTeam) {
     assertThrows(GameInputValidationException.class,
         () -> boardService.finishGame(homeTeam, awayTeam));
