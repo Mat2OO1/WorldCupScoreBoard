@@ -51,6 +51,15 @@ public class BoardServiceTest {
     assertTrue(boardService.getGames().isEmpty());
   }
 
+  @ParameterizedTest
+  @CsvSource(value ={"null, away", "home, null", ",away", "home,"}, nullValues = "null")
+  public void shouldNotFinishGameWhenInputIsInvalid(String homeTeam, String awayTeam) {
+    BoardService boardService = new BoardService();
+
+    assertThrows(
+        GameInputValidationException.class, () -> boardService.finishGame(homeTeam,  awayTeam));
+  }
+
   @Test
   public void shouldThrowExceptionWhenGameToFinishNotFound() {
     BoardService boardService = new BoardService();
