@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.example.BoardService;
 import org.example.exception.GameAlreadyStartedException;
+import org.example.exception.GameInputValidationException;
 import org.example.exception.GameNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

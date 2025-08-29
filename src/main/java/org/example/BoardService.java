@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ public class BoardService implements IBoardService {
   private final List<Game> currentGames = new ArrayList<>();
 
   public void startGame(String homeTeam, String awayTeam) {
+    BoardServiceUtils.validateInput(homeTeam, awayTeam);
     this.getGame(homeTeam, awayTeam).ifPresent(game -> {
       throw new GameAlreadyStartedException(BoardConstants.GAME_ALREADY_STARTED);
     });
@@ -24,12 +26,14 @@ public class BoardService implements IBoardService {
   }
 
   public void finishGame(String homeTeam, String awayTeam) {
+    BoardServiceUtils.validateInput(homeTeam, awayTeam);
     this.getGame(homeTeam, awayTeam).ifPresentOrElse(currentGames::remove, () -> {
       throw new GameNotFoundException(BoardConstants.GAME_NOT_FOUND);
     });
   }
 
   public Game updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
+    BoardServiceUtils.validateUpdateInput(homeTeam, awayTeam, homeScore, awayScore);
     Game foundGame = this.getGame(homeTeam, awayTeam)
         .orElseThrow(() -> new GameNotFoundException(BoardConstants.GAME_NOT_FOUND));
     foundGame.setHomeGoals(homeScore);
@@ -38,10 +42,11 @@ public class BoardService implements IBoardService {
   }
 
   public List<Game> getSummary() {
-    var gameList = new ArrayList<>(currentGames);
-    gameList.sort(Comparator.comparingInt(Game::getTotalGoals).reversed());
+    var games = new ArrayList<>(currentGames);
 
-    return gameList;
+    Collections.reverse(games);
+    games.sort(Comparator.comparingInt(Game::getTotalGoals).reversed());
+    return games;
   }
 
   public List<Game> getGames() {
