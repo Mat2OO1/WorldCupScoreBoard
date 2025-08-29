@@ -1,10 +1,14 @@
-package org.example;
+package org.example.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.example.constants.BoardConstants;
+import org.example.utils.BoardServiceUtils;
+import org.example.domain.Game;
+import org.example.repository.GameRepository;
 import org.example.exception.GameAlreadyStartedException;
 import org.example.exception.GameNotFoundException;
 

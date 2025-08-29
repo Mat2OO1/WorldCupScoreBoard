@@ -1,5 +1,6 @@
-package org.example;
+package org.example.utils;
 
+import org.example.constants.BoardConstants;
 import org.example.exception.GameInputValidationException;
 
 public class BoardServiceUtils {

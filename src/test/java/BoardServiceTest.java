@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.example.BoardService;
-import org.example.GameRepository;
+import org.example.service.BoardService;
+import org.example.repository.GameRepository;
 import org.example.exception.GameAlreadyStartedException;
 import org.example.exception.GameInputValidationException;
 import org.example.exception.GameNotFoundException;

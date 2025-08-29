@@ -1,8 +1,9 @@
-package org.example;
+package org.example.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.example.domain.Game;
 
 public class GameRepository implements IGameRepository {
 
