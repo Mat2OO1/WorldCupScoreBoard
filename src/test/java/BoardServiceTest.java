@@ -24,12 +24,12 @@ public class BoardServiceTest {
   }
 
   @ParameterizedTest
-  @CsvSource(value ={"null, away", "home, null", ",away", "home,"}, nullValues = "null")
+  @CsvSource(value = {"null, away", "home, null", ",away", "home,"}, nullValues = "null")
   public void shouldNotStartGameWhenInputIsInvalid(String homeTeam, String awayTeam) {
     BoardService boardService = new BoardService();
 
     assertThrows(
-        GameInputValidationException.class, () -> boardService.startGame(homeTeam,  awayTeam));
+        GameInputValidationException.class, () -> boardService.startGame(homeTeam, awayTeam));
   }
 
   @Test
@@ -52,12 +52,12 @@ public class BoardServiceTest {
   }
 
   @ParameterizedTest
-  @CsvSource(value ={"null, away", "home, null", ",away", "home,"}, nullValues = "null")
+  @CsvSource(value = {"null, away", "home, null", ",away", "home,"}, nullValues = "null")
   public void shouldNotFinishGameWhenInputIsInvalid(String homeTeam, String awayTeam) {
     BoardService boardService = new BoardService();
 
     assertThrows(
-        GameInputValidationException.class, () -> boardService.finishGame(homeTeam,  awayTeam));
+        GameInputValidationException.class, () -> boardService.finishGame(homeTeam, awayTeam));
   }
 
   @Test
@@ -79,6 +79,26 @@ public class BoardServiceTest {
     var updatedGame = boardService.getGames().getFirst();
     assertEquals(1, updatedGame.getHomeGoals());
     assertEquals(3, updatedGame.getAwayGoals());
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = {"null, away", "home, null", ",away", "home,"}, nullValues = "null")
+  public void shouldNotUpdateScoreWhenTeamInputIsInvalid(String homeTeam, String awayTeam) {
+    BoardService boardService = new BoardService();
+
+    assertThrows(
+        GameInputValidationException.class,
+        () -> boardService.updateScore(homeTeam, awayTeam, 1, 1));
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = {"1,-2", "-2,1"})
+  public void shouldNotUpdateScoreWhenScoreInputIsInvalid(int homeScore, int awayScore) {
+    BoardService boardService = new BoardService();
+
+    assertThrows(
+        GameInputValidationException.class,
+        () -> boardService.updateScore("home", "away", homeScore, awayScore));
   }
 
   @Test
